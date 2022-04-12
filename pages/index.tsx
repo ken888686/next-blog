@@ -1,8 +1,8 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps } from 'next';
+/*
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -68,5 +68,48 @@ const Home: NextPage = () => {
     </div>
   )
 }
+*/
 
-export default Home
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+interface HomeProps {
+  post: Post;
+}
+
+export default function Home({ post }: HomeProps) {
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>{post.body}</p>
+    </div>
+  );
+}
+
+/*
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+  const post: Post = await res.json();
+
+  return {
+    props: {
+      post,
+    },
+  };
+};
+*/
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+  const post: Post = await res.json();
+
+  return {
+    props: {
+      post,
+    },
+  };
+};
