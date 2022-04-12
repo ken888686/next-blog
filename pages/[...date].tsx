@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router';
 
-const Date = () => {
+export default function Date() {
   const router = useRouter();
   const data = router.query;
-  console.log(data);
-};
-
-export default Date;
+  return <p>{data.date}</p>;
+}
